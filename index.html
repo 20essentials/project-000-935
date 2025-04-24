@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="./assets/favicon.webp"><title>4 Cards in 3D</title><link rel="stylesheet" href="index.B1qrtXVg.css"></head> <body>  <section class="cards" data-astro-cid-cadpvj5l> <div class="three-d-wrapper" data-astro-cid-cadpvj5l> <div class="card charizard animated" data-astro-cid-cadpvj5l></div> </div> <div class="three-d-wrapper" data-astro-cid-cadpvj5l> <div class="card pika animated" data-astro-cid-cadpvj5l></div> </div> <div class="three-d-wrapper" data-astro-cid-cadpvj5l> <div class="card eevee animated" data-astro-cid-cadpvj5l></div> </div> <div class="three-d-wrapper" data-astro-cid-cadpvj5l> <div class="card mewtwo animated" data-astro-cid-cadpvj5l></div> </div> </section>  <script type="module">
+  const cards = document.querySelectorAll('.card');
+  const styleTag = document.querySelector('.hover');
+
+  let timeoutId;
+
+  cards.forEach(card => {
+    const handleMove = e => {
+      e.preventDefault();
+
+      const isTouch = e.type === 'touchmove';
+      const rect = card.getBoundingClientRect();
+
+      const offsetX = isTouch ? e.touches[0].clientX - rect.left : e.offsetX;
+      const offsetY = isTouch ? e.touches[0].clientY - rect.top : e.offsetY;
+
+      const w = card.offsetWidth;
+      const h = card.offsetHeight;
+
+      const px = Math.abs(Math.floor((100 / w) * offsetX) - 100);
+      const py = Math.abs(Math.floor((100 / h) * offsetY) - 100);
+      const pa = 50 - px + (50 - py);
+
+      const lp = 50 + (px - 50) / 1.5;
+      const tp = 50 + (py - 50) / 1.5;
+      const pxSpark = 50 + (px - 50) / 7;
+      const pySpark = 50 + (py - 50) / 7;
+      const opacity = 20 + Math.abs(pa) * 1.5;
+
+      const ty = ((tp - 50) / 2) * -1;
+      const tx = ((lp - 50) / 1.5) * 0.5;
+
+      card.classList.remove('animated');
+      card.style.transform = `rotateX(${ty}deg) rotateY(${tx}deg)`;
+
+      styleTag.textContent = `
+        .card:hover::before { background-position: ${lp}% ${tp}%; }
+        .card:hover::after  { background-position: ${pxSpark}% ${pySpark}%; opacity: ${opacity / 100}; }
+      `;
+
+      clearTimeout(timeoutId);
+    };
+
+    const handleLeave = () => {
+      card.removeAttribute('style');
+      styleTag.textContent = '';
+
+      timeoutId = setTimeout(() => {
+        card.classList.add('animated');
+      }, 2500);
+    };
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('touchmove', handleMove, { passive: false });
+
+    card.addEventListener('mouseout', handleLeave);
+    card.addEventListener('touchend', handleLeave);
+    card.addEventListener('touchcancel', handleLeave);
+  });
+</script>  <script type="module">window.addEventListener("resize",e=>{document.title=`${window.innerWidth}`});</script></body></html>
