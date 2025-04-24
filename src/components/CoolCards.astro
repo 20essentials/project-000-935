@@ -1,0 +1,343 @@
+<section class='cards'>
+  <div class='three-d-wrapper'>
+    <div class='card charizard animated'></div>
+  </div>
+  <div class='three-d-wrapper'>
+    <div class='card pika animated'></div>
+  </div>
+  <div class='three-d-wrapper'>
+    <div class='card eevee animated'></div>
+  </div>
+  <div class='three-d-wrapper'>
+    <div class='card mewtwo animated'></div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --color1: rgb(0, 231, 255);
+    --color2: rgb(255, 0, 231);
+    --charizard1: #fac;
+    --charizard2: #ddccaa;
+    --charizardfront: url('./assets/charizard.avif');
+    --pika1: #54a29e;
+    --pika2: #a79d66;
+    --pikafront: url('./assets/pikachu.avif');
+    --eevee1: #ec9bb6;
+    --eevee2: #ccac6f;
+    --eevee3: #69e4a5;
+    --eevee4: #8ec5d6;
+    --eevee5: #b98cce;
+    --eeveefront: url('./assets/eevee.avif');
+    --mewtwo1: #efb2fb;
+    --mewtwo2: #acc6f8;
+    --mewtwofront: url('./assets/mewto.avif');
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    height: 100vh;
+    background-color: #000;
+
+    .three-d-wrapper {
+      perspective: 750px;
+      isolation: isolate;
+      transform: translate3d(0.1px, 0.1px, 0.1px);
+    }
+
+    .card {
+      width: 16vw;
+      aspect-ratio: 12 / 17;
+      position: relative;
+      margin: 20px;
+      overflow: hidden;
+      z-index: 10;
+      touch-action: none;
+      isolation: isolate;
+      border-radius: 5% / 3.5%;
+      box-shadow:
+        -5px -5px 5px -5px var(--color1),
+        5px 5px 5px -5px var(--color2),
+        0 0 5px 0 rgba(255, 255, 255, 0),
+        0 55px 35px -20px rgba(0, 0, 0, 0.5);
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.2s ease;
+      will-change: transform, filter;
+      background-color: #040712;
+      background-image: var(--front);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      transform-origin: center;
+
+      @media (width <= 1111px) {
+        width: 25vw;
+      }
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.5;
+        mix-blend-mode: color-dodge;
+        transition: all 0.33s ease;
+      }
+
+      &:before {
+        background-image: linear-gradient(
+          115deg,
+          transparent 0%,
+          var(--color1) 25%,
+          transparent 47%,
+          transparent 53%,
+          var(--color2) 75%,
+          transparent 100%
+        );
+        background-size: 300% 300%;
+        filter: brightness(0.5) contrast(1);
+        z-index: 1;
+      }
+
+      &:after {
+        background-image: url('https://assets.codepen.io/13471/sparkles.gif'),
+          url(https://assets.codepen.io/13471/holo.png),
+          linear-gradient(
+            125deg,
+            #ff008450 15%,
+            #fca40040 30%,
+            #ffff0030 40%,
+            #00ff8a20 60%,
+            #00cfff40 70%,
+            #cc4cfa50 85%
+          );
+        background-position: 50% 50%;
+        background-size: 160%;
+        background-blend-mode: overlay;
+        filter: brightness(1) contrast(1);
+        z-index: 2;
+        opacity: 0.75;
+      }
+
+      &:hover,
+      &.active {
+        animation: none;
+        transition: box-shadow 0.1s ease-out;
+
+        &:before {
+          background-image: linear-gradient(
+            110deg,
+            transparent 25%,
+            var(--color1) 48%,
+            var(--color2) 52%,
+            transparent 75%
+          );
+          background-size: 250% 250%;
+          filter: brightness(0.66) contrast(1.33);
+          opacity: 0.88;
+          transition: none;
+        }
+
+        &:after {
+          filter: brightness(1) contrast(1);
+          opacity: 1;
+          transition: none;
+        }
+      }
+
+      &.animated {
+        animation: holoCard 12s ease 0s 1;
+        &:before {
+          animation: holoGradient 12s ease 0s 1;
+        }
+        &:after {
+          animation: holoSparkle 12s ease 0s 1;
+        }
+      }
+
+      &:hover {
+        box-shadow:
+          0 0 30px -5px white,
+          0 0 10px -2px white,
+          0 55px 35px -20px rgba(0, 0, 0, 0.5);
+
+        &:before {
+          background-image: linear-gradient(
+            115deg,
+            transparent 20%,
+            var(--color1) 36%,
+            var(--color2) 43%,
+            var(--color3) 50%,
+            var(--color4) 57%,
+            var(--color5) 64%,
+            transparent 80%
+          );
+        }
+      }
+
+      &.charizard {
+        --color1: var(--charizard1);
+        --color2: var(--charizard2);
+        --front: var(--charizardfront);
+      }
+
+      &.pika {
+        --color1: var(--pika1);
+        --color2: var(--pika2);
+        --front: var(--pikafront);
+      }
+
+      &.mewtwo {
+        --color1: var(--mewtwo1);
+        --color2: var(--mewtwo2);
+        --front: var(--mewtwofront);
+      }
+
+      &.eevee {
+        --color1: var(--eevee1);
+        --color2: var(--eevee2);
+        --color3: var(--eevee3);
+        --color4: var(--eevee4);
+        --color5: var(--eevee5);
+        --front: var(--eeveefront);
+      }
+    }
+  }
+
+  @keyframes holoSparkle {
+    0%,
+    100% {
+      opacity: 0.75;
+      background-position: 50% 50%;
+      filter: brightness(1.2) contrast(1.25);
+    }
+    5%,
+    8% {
+      opacity: 1;
+      background-position: 40% 40%;
+      filter: brightness(0.8) contrast(1.2);
+    }
+    13%,
+    16% {
+      opacity: 0.5;
+      background-position: 50% 50%;
+      filter: brightness(1.2) contrast(0.8);
+    }
+    35%,
+    38% {
+      opacity: 1;
+      background-position: 60% 60%;
+      filter: brightness(1) contrast(1);
+    }
+    55% {
+      opacity: 0.33;
+      background-position: 45% 45%;
+      filter: brightness(1.2) contrast(1.25);
+    }
+  }
+
+  @keyframes holoGradient {
+    0%,
+    100% {
+      opacity: 0.5;
+      background-position: 50% 50%;
+      filter: brightness(0.5) contrast(1);
+    }
+    5%,
+    9% {
+      background-position: 100% 100%;
+      opacity: 1;
+      filter: brightness(0.75) contrast(1.25);
+    }
+    13%,
+    17% {
+      background-position: 0% 0%;
+      opacity: 0.88;
+    }
+    35%,
+    39% {
+      background-position: 100% 100%;
+      opacity: 1;
+      filter: brightness(0.5) contrast(1);
+    }
+    55% {
+      background-position: 0% 0%;
+      opacity: 1;
+      filter: brightness(0.75) contrast(1.25);
+    }
+  }
+
+  @keyframes holoCard {
+    0%,
+    100% {
+      transform: rotateZ(0deg) rotateX(0deg);
+    }
+    50% {
+      transform: rotateZ(1deg) rotateX(1deg);
+    }
+  }
+</style>
+
+<script type='module'>
+  const cards = document.querySelectorAll('.card');
+  const styleTag = document.querySelector('.hover');
+
+  let timeoutId;
+
+  cards.forEach(card => {
+    const handleMove = e => {
+      e.preventDefault();
+
+      const isTouch = e.type === 'touchmove';
+      const rect = card.getBoundingClientRect();
+
+      const offsetX = isTouch ? e.touches[0].clientX - rect.left : e.offsetX;
+      const offsetY = isTouch ? e.touches[0].clientY - rect.top : e.offsetY;
+
+      const w = card.offsetWidth;
+      const h = card.offsetHeight;
+
+      const px = Math.abs(Math.floor((100 / w) * offsetX) - 100);
+      const py = Math.abs(Math.floor((100 / h) * offsetY) - 100);
+      const pa = 50 - px + (50 - py);
+
+      const lp = 50 + (px - 50) / 1.5;
+      const tp = 50 + (py - 50) / 1.5;
+      const pxSpark = 50 + (px - 50) / 7;
+      const pySpark = 50 + (py - 50) / 7;
+      const opacity = 20 + Math.abs(pa) * 1.5;
+
+      const ty = ((tp - 50) / 2) * -1;
+      const tx = ((lp - 50) / 1.5) * 0.5;
+
+      card.classList.remove('animated');
+      card.style.transform = `rotateX(${ty}deg) rotateY(${tx}deg)`;
+
+      styleTag.textContent = `
+        .card:hover::before { background-position: ${lp}% ${tp}%; }
+        .card:hover::after  { background-position: ${pxSpark}% ${pySpark}%; opacity: ${opacity / 100}; }
+      `;
+
+      clearTimeout(timeoutId);
+    };
+
+    const handleLeave = () => {
+      card.removeAttribute('style');
+      styleTag.textContent = '';
+
+      timeoutId = setTimeout(() => {
+        card.classList.add('animated');
+      }, 2500);
+    };
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('touchmove', handleMove, { passive: false });
+
+    card.addEventListener('mouseout', handleLeave);
+    card.addEventListener('touchend', handleLeave);
+    card.addEventListener('touchcancel', handleLeave);
+  });
+</script>
