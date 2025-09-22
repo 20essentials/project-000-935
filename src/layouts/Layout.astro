@@ -1,5 +1,5 @@
 ---
-  import '@/styles/global.css'
+import '@/styles/global.css';
 ---
 
 <!doctype html>
@@ -9,14 +9,12 @@
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='./assets/favicon.webp' />
     <title>4 Cards in 3D</title>
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/@mantine/core@latest/styles.css'
+    />
   </head>
   <body>
     <slot />
   </body>
 </html>
-
-<script>
-  window.addEventListener('resize', e => {
-    document.title = `${window.innerWidth}`;
-  });
-</script>

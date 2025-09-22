@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "just",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.5"
+    "astro": "5.7.5"
   },
   "devDependencies": {
     "gh-pages": "6.3.0"
