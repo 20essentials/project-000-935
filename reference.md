@@ -1,2 +1,0 @@
-- **Reference / Inspiration ⬇️**
-  - [Inspirado en el design de Codepen de Simon Goelther](https://codepen.io/simeydotme/pen/PrQKgo)

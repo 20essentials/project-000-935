@@ -42,26 +42,26 @@
     background-color: #000;
 
     .three-d-wrapper {
-      perspective: 750px;
+      perspective: 48.83vmax;
+      transform: translate3d(0.01vmax, 0.01vmax, 0.01vmax);
       isolation: isolate;
-      transform: translate3d(0.1px, 0.1px, 0.1px);
     }
 
     .card {
-      width: 16vw;
       aspect-ratio: 12 / 17;
       position: relative;
-      margin: 20px;
       overflow: hidden;
       z-index: 10;
       touch-action: none;
       isolation: isolate;
       border-radius: 5% / 3.5%;
+      width: 18vmax;
+      margin: 1.3vmax;
       box-shadow:
-        -5px -5px 5px -5px var(--color1),
-        5px 5px 5px -5px var(--color2),
-        0 0 5px 0 rgba(255, 255, 255, 0),
-        0 55px 35px -20px rgba(0, 0, 0, 0.5);
+        -0.33vmax -0.33vmax 0.33vmax -0.33vmax var(--color1),
+        0.33vmax 0.33vmax 0.33vmax -0.33vmax var(--color2),
+        0 0 0.33vmax 0 rgba(255, 255, 255, 0),
+        0 3.58vmax 2.28vmax -1.3vmax rgba(0, 0, 0, 0.5);
       transition:
         transform 0.5s ease,
         box-shadow 0.2s ease;
@@ -72,10 +72,6 @@
       background-repeat: no-repeat;
       background-position: 50% 50%;
       transform-origin: center;
-
-      @media (width <= 1111px) {
-        width: 25vw;
-      }
 
       &:before,
       &:after {
@@ -160,9 +156,9 @@
 
       &:hover {
         box-shadow:
-          0 0 30px -5px white,
-          0 0 10px -2px white,
-          0 55px 35px -20px rgba(0, 0, 0, 0.5);
+          0 0 1.95vmax -0.33vmax white,
+          0 0 0.65vmax -0.13vmax white,
+          0 3.58vmax 2.28vmax -1.3vmax rgba(0, 0, 0, 0.5);
 
         &:before {
           background-image: linear-gradient(
